@@ -1,0 +1,3 @@
+Ask Laboon:
+
+ProgramStackTest already has the three pinning tests I had planned to use.  Should I treat them as pinning tests and mark that in my report or create dubplicate tests?
