@@ -14,7 +14,8 @@ import java.util.*;
 // +   Addition: Pop two values a and b, then push the result of a+b
 // -   Subtraction: Pop two values a and b, then push the result of b-a
 // *   Multiplication: Pop two values a and b, then push the result of a*b
-// /   Integer division: Pop two values a and b, then push the result of b/a, rounded down. According to the specifications, if a is zero, ask the user what result they want.
+// /   Integer division: Pop two values a and b, then push the result of b/a, rounded down. 
+//			According to the specifications, if a is zero, ask the user what result they want.
 // %   Modulo: Pop two values a and b, then push the remainder of the integer division of b/a.
 // !   Logical NOT: Pop a value. If the value is zero, push 1; otherwise, push zero.
 // `   Greater than: Pop two values a and b, then push 1 if b>a, otherwise zero.
@@ -32,8 +33,10 @@ import java.util.*;
 // .   Pop top of stack and output as integer
 // ,   Pop top of stack and output as ASCII character
 // #   Bridge: jump over next command in the current direction of the current PC
-// g   A "get" call (a way to retrieve data in storage). Pop two values y and x, then push the ASCII value of the character at that position in the program. If (x,y) is out of bounds, push 0
-// p   A "put" call (a way to store a value for later use). Pop three values y, x and v, then change the character at the position (x,y) in the program to the character with ASCII value v
+// g   A "get" call (a way to retrieve data in storage). Pop two values y and x, then push the 
+//			ASCII value of the character at that position in the program. If (x,y) is out of bounds, push 0
+// p   A "put" call (a way to store a value for later use). Pop three values y, x and v, then 
+//			change the character at the position (x,y) in the program to the character with ASCII value v
 // &   Get integer from user and push it
 // ~   Get character from user and push it
 // @   End program
@@ -47,7 +50,7 @@ public class ProgramExecutor {
     // Static because we don't really need a new RNG for each program
     // Also, no worries about thread safety since program execution is
     // single-threaded
-    public static Random _r = new Random();
+    static final Random _r = new Random();
 
     // A reference to the MainPanel, which will allow us to update
     // the stack and output areas.
@@ -83,6 +86,12 @@ public class ProgramExecutor {
     // The opcode '"' puts us into string mode when first encountered, and
     // will exit that mode when a second '"' opcode is encountered.
     public boolean _inStringMode = false;
+
+	/**
+	 * Takes in a character and interprets it as an instruction.  
+	 * Calls other methods based off of which instruction was received.
+	 * @param c char to interpret as a command
+	 */
 
     public void executeInstruction(char c) {
 	// If the stack is empty, and is not otherwise caught,
@@ -138,7 +147,8 @@ public class ProgramExecutor {
 		multiply();
 		break;
 		    
-		// /   Integer division: Pop two values a and b, then push the result of b/a, rounded down. According to the specifications, if a is zero, ask the user what result they want.
+		// /   Integer division: Pop two values a and b, then push the result of b/a, rounded down. 
+		//		According to the specifications, if a is zero, ask the user what result they want.
 	    case '/':
 		divide();
 		break;
@@ -229,12 +239,16 @@ public class ProgramExecutor {
 		moveOneSpace();
 		break;
 
-		// g   A "get" call (a way to retrieve data in storage). Pop two values y and x, then push the ASCII value of the character at that position in the program. If (x,y) is out of bounds, push 0
+		// g   A "get" call (a way to retrieve data in storage). Pop two values y and x, 
+		//		then push the ASCII value of the character at that position in the program. 
+		//		If (x,y) is out of bounds, push 0
 	    case 'g':
 		get();
 		break;
 
-		// p   A "put" call (a way to store a value for later use). Pop three values y, x and v, then change the character at the position (x,y) in the program to the character with ASCII value v
+		// p   A "put" call (a way to store a value for later use). 
+		//		Pop three values y, x and v, then change the character at the position (x,y) 
+		//		in the program to the character with ASCII value v
 	    case 'p':
 		put();
 		break;
@@ -427,6 +441,10 @@ public class ProgramExecutor {
 	case 3:
 	    _d = Direction.DOWN;
 	    break;
+	//when in doubt, go up to get to heaven
+	default:
+		_d = Direction.UP;
+		System.err.println("Case not support so we are going UP.  Good luck.");
 	}
 
     }
@@ -610,6 +628,9 @@ public class ProgramExecutor {
 	    }
 
 	    break;
+	default:
+		_x = 0;
+		System.err.println("Cannot move in this direction. Setting _x to 0 for safety. Safety First.");
 	}
     }
 

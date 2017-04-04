@@ -32,7 +32,7 @@ public class ProgramStack {
      */
     
     public void push(int val) {
-	_stack.push(new Integer(val));
+	_stack.push(Integer.valueOf(val));
     }
 
     /**
@@ -105,23 +105,24 @@ public class ProgramStack {
      */
     
     public String toString() {
-	String throwaway = new String();
 	if (_stack.size() == 0) {
-	    return new String("[]");
+	    return ("[]");
 	}
 	if (_stack.size() == 1) {
-	    return new String("[" + _stack.peek() + "]");
+	    return ("[" + _stack.peek() + "]");
 	}
 
-	String toReturn = new String("");
-	String startStr = new String("");
-	toReturn = startStr + "[";
+	StringBuffer toReturn = new StringBuffer("");
+	String startStr = "";
+	toReturn = new StringBuffer(startStr + "[");
 	for (Integer i: _stack) {
-	    toReturn += i.intValue() + ", ";
+	    toReturn.append(i.intValue());
+		toReturn.append(", ");
 	}
-	toReturn = toReturn.substring(0, toReturn.length() - 2);
-	toReturn += new String("]");
-	return toReturn;
+	toReturn = new StringBuffer(toReturn.substring(0, toReturn.length() - 2));
+	toReturn.append("]");
+	
+	return toReturn.toString();
 
     }
     
