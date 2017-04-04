@@ -14,11 +14,11 @@ public class StepButton extends JButton {
 	addActionListener(new StepButtonListener());
     }
 
-    class StepButtonListener implements ActionListener {
+    static class StepButtonListener implements ActionListener {
 
 	public void actionPerformed(ActionEvent e) {
-	    // _m.step();
 	}
+	    // _m.step();
     }    
     
 }

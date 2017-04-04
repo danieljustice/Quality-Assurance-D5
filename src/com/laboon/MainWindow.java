@@ -7,8 +7,8 @@ import java.util.*;
 
 public class MainWindow extends JFrame {
 
-    private final int HEIGHT = 600;
-    private final int WIDTH = 800;
+    private final static int HEIGHT = 600;
+    private final static int WIDTH = 800;
     
     private JFrame _frame = new JFrame("JBefunge");
 
